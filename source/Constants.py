@@ -1,0 +1,5 @@
+# Constants
+ORIGIN = (0, 0)
+
+DARK_COLOR = (50, 85, 255)
+LIGHT_COLOR = (200, 200, 200)
