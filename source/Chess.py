@@ -17,6 +17,7 @@ def main():
         title = TitleScreen.start(screen, clock)
         if title == "QUIT":
             run = False
+
         else:
             if title == "1 PLAYER":  # TODO: MAKE GAME FUNC -> THIS PREVENTS QUITTING
                 bg = pygame.Surface(screen.get_size()).convert()
