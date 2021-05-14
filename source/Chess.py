@@ -1,8 +1,11 @@
 import pygame
 
 import Colors
-import TitleScreen
 import Constants
+
+import TitleScreen
+import MultiplayerSelectionScreen
+import GameScreen
 
 
 def main():
@@ -19,22 +22,16 @@ def main():
             run = False
 
         else:
-            if title == "1 PLAYER":  # TODO: MAKE GAME FUNC -> THIS PREVENTS QUITTING
-                bg = pygame.Surface(screen.get_size()).convert()
-                bg.fill(Colors.BLACK)
-                while 1:
-                    screen.blit(bg, Constants.ORIGIN)
-                    pygame.display.flip()
-            elif title == "2 PLAYERS":  # TODO: MAKE GAME FUNC -> THIS PREVENTS QUITTING
-                bg = pygame.Surface(screen.get_size()).convert()
-                bg.fill(Colors.BLACK)
-                while 1:
-                    screen.blit(bg, Constants.ORIGIN)
-                    pygame.display.flip()
+            if title == "1 PLAYER":
+                game = GameScreen.start()
+                break  # TODO: Change this ?
+            elif title == "2 PLAYERS":  # TODO: Multi player
+                game = MultiplayerSelectionScreen.start()
+                break  # TODO: Change this ?
             else:
                 print("error:", title)
                 run = False
-                break;
+                break
 
 
 if __name__ == "__main__":

@@ -1,5 +1,12 @@
 # Constants
+
+# Positions
 ORIGIN = (0, 0)
 
+# Colors
 DARK_COLOR = (50, 85, 255)
 LIGHT_COLOR = (200, 200, 200)
+
+# Sizes
+TILE_LENGTH = 50
+TILE_SIZE = (TILE_LENGTH, TILE_LENGTH)
