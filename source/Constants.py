@@ -1,4 +1,6 @@
 # Constants
+BOARD_ROWS = 8
+BOARD_COLS = 8
 
 # Positions
 ORIGIN = (0, 0)
