@@ -12,7 +12,7 @@ def main():
     pygame.init()
     pygame.display.set_caption("Chess")
 
-    screen = pygame.display.set_mode((800, 550))
+    screen = pygame.display.set_mode(Constants.SCREEN_SIZE)
 
     run = True
     clock = pygame.time.Clock()
@@ -23,7 +23,7 @@ def main():
 
         else:
             if title == "1 PLAYER":
-                game = GameScreen.start()
+                game = GameScreen.start(screen, clock)
                 break  # TODO: Change this ?
             elif title == "2 PLAYERS":  # TODO: Multi player
                 game = MultiplayerSelectionScreen.start()
