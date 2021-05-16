@@ -11,8 +11,8 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
     background = pygame.Surface(screen.get_size()).convert()
     background.fill(Colors.BLACK)
 
-    board = ChessBoard.ChessBoard(*(MathHelp.snap_topleft(screen.get_size(), Constants.ORIGIN,
-                                                          Constants.BOARD_SIZE)))
+    board = ChessBoard.ChessBoard("standard", *(MathHelp.snap_topleft(screen.get_size(), Constants.ORIGIN,
+                                                                      Constants.BOARD_SIZE)))
 
     run = True
     while run:

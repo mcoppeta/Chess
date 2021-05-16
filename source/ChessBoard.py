@@ -8,7 +8,7 @@ import Tile
 
 
 class ChessBoard:
-    def __init__(self, x: int, y: int):
+    def __init__(self, game_type: str, x: int, y: int):
         self.image = pygame.Surface(MathHelp.scale_tuple(2 + Constants.BOARD_ROWS, Constants.TILE_SIZE)).convert()
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
@@ -43,3 +43,9 @@ class ChessBoard:
 
                 colors_index = MathHelp.toggle(colors_index)
             colors_index = MathHelp.toggle(colors_index)
+
+            self.grid = [[] for i in range(8)]
+            if game_type == "standard":
+                print("standard")
+            else:
+                print("error")
