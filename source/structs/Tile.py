@@ -1,5 +1,5 @@
 import pygame
-import Constants
+from Chess.source.assist import Constants
 
 
 class Tile:

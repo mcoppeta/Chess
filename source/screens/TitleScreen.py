@@ -1,7 +1,7 @@
 import pygame
-from Constants import *
-from Colors import *
-import LinkButtons
+from Chess.source.assist.Constants import *
+from Chess.source.assist.Colors import *
+from source.structs import LinkButtons
 
 
 def start(screen, clock):

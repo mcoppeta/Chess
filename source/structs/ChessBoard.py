@@ -1,8 +1,6 @@
 import pygame
 
-import Constants
-import Colors
-import MathHelp
+from Chess.source.assist import MathHelp, Colors, Constants
 
 import Tile
 

@@ -1,11 +1,8 @@
 import pygame
 
-import Colors
-import Constants
+import source.assist.Constants as Constants
 
-import TitleScreen
-import MultiplayerSelectionScreen
-import GameScreen
+from source.screens import GameScreen, MultiplayerSelectionScreen, TitleScreen
 
 
 def main():

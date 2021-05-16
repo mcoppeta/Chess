@@ -1,10 +1,8 @@
 import pygame
 
-import Colors
-import Constants
-import MathHelp
+from Chess.source.assist import MathHelp, Colors, Constants
 
-import ChessBoard
+from source.structs import ChessBoard
 
 
 def start(screen: pygame.Surface, clock: pygame.time.Clock):
