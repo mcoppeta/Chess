@@ -1,8 +1,10 @@
 import pygame
 
-from Chess.source.assist import MathHelp, Colors, Constants
+from source.assist import MathHelp, Colors, Constants
 
-import Tile
+from source.structs import Tile
+
+from source.enums import GamePiece
 
 
 class ChessBoard:
@@ -42,8 +44,8 @@ class ChessBoard:
                 colors_index = MathHelp.toggle(colors_index)
             colors_index = MathHelp.toggle(colors_index)
 
-            self.grid = [[] for i in range(8)]
+            self.grid = [[GamePiece.GamePiece.NULL for j in range(8)] for i in range(8)]
             if game_type == "standard":
-                print("standard")
+                print(self.grid)
             else:
                 print("error")

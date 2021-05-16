@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class GamePiece(Enum):
+    NULL = 0
     PAWN = 1
     ROOK = 2
     KNIGHT = 3

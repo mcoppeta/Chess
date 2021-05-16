@@ -1,6 +1,6 @@
 import pygame
 
-from Chess.source.assist import MathHelp, Colors, Constants
+from source.assist import MathHelp, Colors, Constants
 
 from source.structs import ChessBoard
 

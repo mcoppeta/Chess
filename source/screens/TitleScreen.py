@@ -1,6 +1,6 @@
 import pygame
-from Chess.source.assist.Constants import *
-from Chess.source.assist.Colors import *
+from source.assist.Constants import *
+from source.assist.Colors import *
 from source.structs import LinkButtons
 
 
