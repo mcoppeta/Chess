@@ -2,7 +2,7 @@ import pygame
 
 from source.assist import MathHelp, Colors, Constants
 
-from source.structs import Tile
+from source.structs import Tile, Piece
 
 from source.enums import GamePiece
 
@@ -44,8 +44,11 @@ class ChessBoard:
                 colors_index = MathHelp.toggle(colors_index)
             colors_index = MathHelp.toggle(colors_index)
 
-            self.grid = [[GamePiece.GamePiece.NULL for j in range(8)] for i in range(8)]
-            if game_type == "standard":
-                print(self.grid)
-            else:
-                print("error")
+    def blit(self, screen: pygame.Surface):
+        screen.blit(self.image, self.rect.topleft)
+
+    def blit_pieces(self, screen: pygame.Surface):
+        p = Piece.Piece(GamePiece.GamePiece.PAWN, 2, 2)
+        screen.blit(p.image, (0, 0))
+
+

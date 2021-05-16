@@ -21,5 +21,8 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
                 run = False
 
         screen.blit(background, (0, 0))
-        screen.blit(board.image, board.rect.topleft)
+
+        board.blit(screen)
+        board.blit_pieces(screen)
+
         pygame.display.flip()
