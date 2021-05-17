@@ -56,15 +56,13 @@ class ChessBoard:
 
     def create_grid_standard(self):
         grid = [[0 for j in range(8)] for i in range(8)]
-        for r in range(8):
-            for c in range(8):
-                if r == 1 or r == 6:
-                    p = Piece.Piece(GamePiece.GamePiece.PAWN, r, c, (1 + r) * Constants.TILE_LENGTH,
-                                    (1 + c) * Constants.TILE_LENGTH)
-                    grid[r][c] = p
+        for r in range(1, 9):
+            for c in range(1, 9):
+                if r == 2 or r == 7:
+                    p = Piece.Piece(GamePiece.GamePiece.PAWN, 1, Colors.WHITE, r, c, self.rect.topleft)
+                    grid[r - 1][c - 1] = p
                 else:
-                    p = Piece.Piece(GamePiece.GamePiece.NULL, r, c, (1 + r) * Constants.TILE_LENGTH,
-                                    (1 + c) * Constants.TILE_LENGTH)
-                    grid[r][c] = p
+                    p = Piece.Piece(GamePiece.GamePiece.NULL, 0, Colors.BLACK, r, c, self.rect.topleft)
+                    grid[r - 1][c - 1] = p
 
         return grid
