@@ -44,11 +44,27 @@ class ChessBoard:
                 colors_index = MathHelp.toggle(colors_index)
             colors_index = MathHelp.toggle(colors_index)
 
+        self.grid = self.create_grid_standard()
+
     def blit(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect.topleft)
 
     def blit_pieces(self, screen: pygame.Surface):
-        p = Piece.Piece(GamePiece.GamePiece.PAWN, 2, 2)
-        screen.blit(p.image, (0, 0))
+        for row in self.grid:
+            for piece in row:
+                screen.blit(piece.image, piece.rect)
 
+    def create_grid_standard(self):
+        grid = [[0 for j in range(8)] for i in range(8)]
+        for r in range(8):
+            for c in range(8):
+                if r == 1 or r == 6:
+                    p = Piece.Piece(GamePiece.GamePiece.PAWN, r, c, (1 + r) * Constants.TILE_LENGTH,
+                                    (1 + c) * Constants.TILE_LENGTH)
+                    grid[r][c] = p
+                else:
+                    p = Piece.Piece(GamePiece.GamePiece.NULL, r, c, (1 + r) * Constants.TILE_LENGTH,
+                                    (1 + c) * Constants.TILE_LENGTH)
+                    grid[r][c] = p
 
+        return grid
