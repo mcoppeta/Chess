@@ -4,6 +4,8 @@ from source.assist import MathHelp, Colors, Constants
 
 from source.structs import ChessBoard
 
+from source.enums.PlayerEnum import PlayerEnum
+
 
 def start(screen: pygame.Surface, clock: pygame.time.Clock):
     background = pygame.Surface(screen.get_size()).convert()
@@ -12,7 +14,7 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
     board = ChessBoard.ChessBoard("standard", *(MathHelp.snap_topleft(screen.get_size(), Constants.ORIGIN,
                                                                       Constants.BOARD_SIZE)))
 
-    turn = 0
+    turn = PlayerEnum.ONE
     played = False
 
     run = True
@@ -26,11 +28,11 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
                 if event.key == pygame.K_RETURN:
                     played = True
             if event.type == pygame.MOUSEMOTION:
-                command = board.pieces.test()
+                command = board.pieces.test(turn)
             if event.type == pygame.MOUSEBUTTONDOWN:
-                command = board.pieces.test()
+                command = board.pieces.test(turn)
             if event.type == pygame.MOUSEBUTTONUP:
-                command = board.pieces.test()
+                command = board.pieces.test(turn)
 
             if command != "NO_ACTION":
                 print(command)
@@ -43,5 +45,10 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
         pygame.display.flip()
 
         if played:
-            turn = MathHelp.toggle(turn)
+            if turn == PlayerEnum.ONE:
+                turn = PlayerEnum.TWO
+            elif turn == PlayerEnum.TWO:
+                turn = PlayerEnum.ONE
+            else:
+                turn = PlayerEnum.NULL
             played = not played

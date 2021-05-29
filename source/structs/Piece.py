@@ -2,11 +2,12 @@ import pygame
 
 from source.assist import Colors, Constants, MathHelp
 
-from source.enums import GamePiece
+from source.enums import GamePiece, PlayerEnum
 
 
 class Piece:
-    def __init__(self, piece_type: GamePiece, player: int, color: pygame.Color, row: int, col: int, board_pos: tuple):
+    def __init__(self, piece_type: GamePiece, player: PlayerEnum.PlayerEnum,
+                 color: pygame.Color, row: int, col: int, board_pos: tuple):
 
         self.row = row
         self.col = col
@@ -34,9 +35,9 @@ class Piece:
     def toString(self) -> str:
         return "T:" + str(self.type) + ", r:" + str(self.row) + ", c:" + str(self.col)
 
-    def test(self):
+    def test(self, turn: PlayerEnum.PlayerEnum):
         mouse_state = pygame.mouse.get_pressed(3)
-        if self.rect.collidepoint(pygame.mouse.get_pos()):
+        if turn == self.player and self.rect.collidepoint(pygame.mouse.get_pos()):
             if self.pressed:
                 if mouse_state[0] == 0:
                     self.pressed = False
@@ -52,7 +53,7 @@ class Piece:
         return "NO_ACTION"
 
     def action(self):
-        return "CLICK: r=" + str(self.row) + ", c=" + str(self.col)
+        return "CLICK: r=" + str(self.row) + ", c=" + str(chr(96 + self.col))
 
 
 class PieceGroup:
@@ -76,10 +77,10 @@ class PieceGroup:
         for p in self.group:
             p.blit(screen)
 
-    def test(self) -> str:
+    def test(self, turn: PlayerEnum.PlayerEnum) -> str:
         command = "NO_ACTION"
         for p in self.group:
-            command = p.test()
+            command = p.test(turn)
             if command != "NO_ACTION":
                 return command
         return command

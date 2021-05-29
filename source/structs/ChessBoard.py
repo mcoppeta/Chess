@@ -4,7 +4,7 @@ from source.assist import MathHelp, Colors, Constants
 
 from source.structs import Tile, Piece
 
-from source.enums import GamePiece
+from source.enums import GamePiece, PlayerEnum
 
 
 class ChessBoard:
@@ -59,13 +59,20 @@ class ChessBoard:
         pieces = Piece.PieceGroup()
         for r in range(1, 9):
             for c in range(1, 9):
-                if r == 2 or r == 7:
-                    p = Piece.Piece(GamePiece.GamePiece.PAWN, 1, Colors.WHITE, r, c, self.rect.topleft)
+                if r == 2:
+                    p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.ONE,
+                                    Colors.WHITE, r, c, self.rect.topleft)
+                    grid[8 - r][c - 1] = p
+                    pieces.add(p)
+                elif r == 7:
+                    p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.TWO,
+                                    Colors.BLACK, r, c, self.rect.topleft)
                     grid[8 - r][c - 1] = p
                     pieces.add(p)
                 else:
-                    p = Piece.Piece(GamePiece.GamePiece.NULL, 0, Colors.BLACK, r, c, self.rect.topleft)
+                    p = Piece.Piece(GamePiece.GamePiece.NULL, PlayerEnum.PlayerEnum.NULL,
+                                    Colors.ORANGE, r, c, self.rect.topleft)
                     grid[8 - r][c - 1] = p
                     pieces.add(p)
-        
+
         return grid, pieces
