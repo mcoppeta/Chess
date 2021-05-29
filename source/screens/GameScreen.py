@@ -12,6 +12,9 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
     board = ChessBoard.ChessBoard("standard", *(MathHelp.snap_topleft(screen.get_size(), Constants.ORIGIN,
                                                                       Constants.BOARD_SIZE)))
 
+    turn = 0
+    played = False
+
     run = True
     while run:
         clock.tick(30)
@@ -19,6 +22,15 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    played = True
+            if event.type == pygame.MOUSEMOTION:
+                board.pieces.test()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                board.pieces.test()
+            if event.type == pygame.MOUSEBUTTONUP:
+                board.pieces.test()
 
         screen.blit(background, (0, 0))
 
@@ -26,3 +38,7 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
         board.blit_pieces(screen)
 
         pygame.display.flip()
+
+        if played:
+            turn = MathHelp.toggle(turn)
+            played = not played

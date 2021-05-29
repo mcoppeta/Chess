@@ -22,7 +22,7 @@ class ChessBoard:
             for col in range(2 + Constants.BOARD_COLS):
                 if row == 0 or row == 1 + Constants.BOARD_ROWS:
                     if 0 < col < 1 + Constants.BOARD_COLS:
-                        current = Tile.LetterTile(colors[colors_index], chr(97 - 1 + col), Colors.WHITE,
+                        current = Tile.LetterTile(colors[colors_index], chr(97 - 1 + col), Colors.BLACK,
                                                   self.font, Constants.TILE_LENGTH * col,
                                                   Constants.TILE_LENGTH * row)
                         current.blit(self.image)
@@ -34,7 +34,7 @@ class ChessBoard:
                 elif col == 0 or col == 1 + Constants.BOARD_COLS:
                     if 0 < row < 1 + Constants.BOARD_ROWS:
                         current = Tile.LetterTile(colors[colors_index], "" + str(Constants.BOARD_ROWS - row + 1),
-                                                  Colors.WHITE, self.font, Constants.TILE_LENGTH * col,
+                                                  Colors.BLACK, self.font, Constants.TILE_LENGTH * col,
                                                   Constants.TILE_LENGTH * row)
                         current.blit(self.image)
                 else:
@@ -44,7 +44,7 @@ class ChessBoard:
                 colors_index = MathHelp.toggle(colors_index)
             colors_index = MathHelp.toggle(colors_index)
 
-        self.grid = self.create_grid_standard()
+        self.grid, self.pieces = self.create_grid_standard()
 
     def blit(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect.topleft)
@@ -56,13 +56,16 @@ class ChessBoard:
 
     def create_grid_standard(self):
         grid = [[0 for j in range(8)] for i in range(8)]
+        pieces = Piece.PieceGroup()
         for r in range(1, 9):
             for c in range(1, 9):
                 if r == 2 or r == 7:
                     p = Piece.Piece(GamePiece.GamePiece.PAWN, 1, Colors.WHITE, r, c, self.rect.topleft)
                     grid[r - 1][c - 1] = p
+                    pieces.add(p)
                 else:
                     p = Piece.Piece(GamePiece.GamePiece.NULL, 0, Colors.BLACK, r, c, self.rect.topleft)
                     grid[r - 1][c - 1] = p
+                    pieces.add(p)
 
-        return grid
+        return grid, pieces
