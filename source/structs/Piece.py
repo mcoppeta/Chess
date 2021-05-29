@@ -33,7 +33,7 @@ class Piece:
         self.pressed = False
 
     def toString(self) -> str:
-        return "T:" + str(self.type) + ", r:" + str(self.row) + ", c:" + str(self.col)
+        return str(self.type.name) + ", " + str(self.row) + chr(self.col + 96)
 
     def test(self, turn: PlayerEnum.PlayerEnum):
         mouse_state = pygame.mouse.get_pressed(3)
@@ -42,7 +42,7 @@ class Piece:
                 if mouse_state[0] == 0:
                     self.pressed = False
                     self.image = self.image_default
-                    return self.action()
+                    return self.toString()
             else:
                 if mouse_state[0] == 1:
                     self.pressed = True
@@ -51,9 +51,6 @@ class Piece:
             self.image = self.image_default
             self.pressed = False
         return "NO_ACTION"
-
-    def action(self):
-        return "CLICK: r=" + str(self.row) + ", c=" + str(chr(96 + self.col))
 
 
 class PieceGroup:

@@ -1,0 +1,19 @@
+TODO:
+
+Replace misc numbers with corresponding constants
+
+Finish board creation, all pieces
+
+Since this is currently single player, we will only let player one move (facing up always, regardless of color)
+
+Implement movement
+-add selection state -> on press
+-on selection, highlight tiles
+--cancel w/ clicking self, or non highlighted piece
+-end turn on movement
+
+Figure out grid rotation -> this might make player two moves easy to implement
+-or just maintain a second grid this is flipped, and just switch between the two
+
+Replace pieces with images instead of a letter
+

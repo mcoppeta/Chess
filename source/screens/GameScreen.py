@@ -51,4 +51,5 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
                 turn = PlayerEnum.ONE
             else:
                 turn = PlayerEnum.NULL
+            print("It is now Player " + turn.name + "'s turn!")
             played = not played
