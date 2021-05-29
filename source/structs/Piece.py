@@ -23,13 +23,16 @@ class Piece:
 
         boardx, boardy = board_pos
         self.x, self.y = MathHelp.snap_topleft(Constants.TILE_SIZE, (boardx + self.col * Constants.TILE_LENGTH,
-                                                                     boardy + self.row * Constants.TILE_LENGTH),
+                                                                     boardy + (9 - self.row) * Constants.TILE_LENGTH),
                                                self.image.get_size())
 
         self.rect = self.image.get_rect()
         self.rect.topleft = self.x, self.y
 
         self.pressed = False
+
+    def toString(self) -> str:
+        return "T:" + str(self.type) + ", r:" + str(self.row) + ", c:" + str(self.col)
 
     def test(self):
         mouse_state = pygame.mouse.get_pressed(3)

@@ -61,11 +61,11 @@ class ChessBoard:
             for c in range(1, 9):
                 if r == 2 or r == 7:
                     p = Piece.Piece(GamePiece.GamePiece.PAWN, 1, Colors.WHITE, r, c, self.rect.topleft)
-                    grid[r - 1][c - 1] = p
+                    grid[8 - r][c - 1] = p
                     pieces.add(p)
                 else:
                     p = Piece.Piece(GamePiece.GamePiece.NULL, 0, Colors.BLACK, r, c, self.rect.topleft)
-                    grid[r - 1][c - 1] = p
+                    grid[8 - r][c - 1] = p
                     pieces.add(p)
-
+        
         return grid, pieces

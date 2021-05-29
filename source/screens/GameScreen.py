@@ -26,11 +26,14 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
                 if event.key == pygame.K_RETURN:
                     played = True
             if event.type == pygame.MOUSEMOTION:
-                board.pieces.test()
+                command = board.pieces.test()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                board.pieces.test()
+                command = board.pieces.test()
             if event.type == pygame.MOUSEBUTTONUP:
-                board.pieces.test()
+                command = board.pieces.test()
+
+            if command != "NO_ACTION":
+                print(command)
 
         screen.blit(background, (0, 0))
 
