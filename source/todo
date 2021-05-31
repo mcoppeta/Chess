@@ -1,7 +1,5 @@
 TODO:
 
-Replace misc numbers with corresponding constants
-
 Finish board creation, all pieces
 
 Since this is currently single player, we will only let player one move (facing up always, regardless of color)

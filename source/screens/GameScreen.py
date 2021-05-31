@@ -19,7 +19,7 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
 
     run = True
     while run:
-        clock.tick(30)
+        clock.tick(Constants.FPS)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -37,7 +37,7 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
             if command != "NO_ACTION":
                 print(command)
 
-        screen.blit(background, (0, 0))
+        screen.blit(background, Constants.ORIGIN)
 
         board.blit(screen)
         board.blit_pieces(screen)

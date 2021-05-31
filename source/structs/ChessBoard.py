@@ -55,24 +55,24 @@ class ChessBoard:
                 screen.blit(piece.image, piece.rect)
 
     def create_grid_standard(self):
-        grid = [[0 for j in range(8)] for i in range(8)]
+        grid = [[0 for j in range(Constants.BOARD_COLS)] for i in range(Constants.BOARD_ROWS)]
         pieces = Piece.PieceGroup()
-        for r in range(1, 9):
-            for c in range(1, 9):
+        for r in range(1, 1 + Constants.BOARD_ROWS):
+            for c in range(1, 1 + Constants.BOARD_COLS):
                 if r == 2:
                     p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.ONE,
                                     Colors.WHITE, r, c, self.rect.topleft)
-                    grid[8 - r][c - 1] = p
+                    grid[Constants.BOARD_ROWS - r][c - 1] = p
                     pieces.add(p)
                 elif r == 7:
                     p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.TWO,
                                     Colors.BLACK, r, c, self.rect.topleft)
-                    grid[8 - r][c - 1] = p
+                    grid[Constants.BOARD_ROWS - r][c - 1] = p
                     pieces.add(p)
                 else:
                     p = Piece.Piece(GamePiece.GamePiece.NULL, PlayerEnum.PlayerEnum.NULL,
                                     Colors.ORANGE, r, c, self.rect.topleft)
-                    grid[8 - r][c - 1] = p
+                    grid[Constants.BOARD_ROWS - r][c - 1] = p
                     pieces.add(p)
 
         return grid, pieces
