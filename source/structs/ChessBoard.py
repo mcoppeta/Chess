@@ -52,7 +52,7 @@ class ChessBoard:
     def blit_pieces(self, screen: pygame.Surface):
         for row in self.grid:
             for piece in row:
-                screen.blit(piece.image, piece.rect)
+                screen.blit(piece.image, piece.rect)  # TODO: Isn't this what PieceGroup is for?
 
     def create_grid_standard(self):
         grid = [[0 for j in range(Constants.BOARD_COLS)] for i in range(Constants.BOARD_ROWS)]

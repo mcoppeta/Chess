@@ -2,16 +2,19 @@ import pygame
 
 from source.assist import Colors, Constants, MathHelp
 
-from source.enums import GamePiece, PlayerEnum
+from source.enums.GamePiece import *
+from source.enums.PlayerEnum import *
+from source.enums.Orientation import *
 
 
 class Piece:
-    def __init__(self, piece_type: GamePiece, player: PlayerEnum.PlayerEnum,
+    def __init__(self, piece_type: GamePiece, player: PlayerEnum,
                  color: pygame.Color, row: int, col: int, board_pos: tuple):
 
         self.row = row
         self.col = col
         self.type = piece_type
+        self.direction = Orientation.UP if player == PlayerEnum.ONE else Orientation.DOWN
 
         self.player = player
         self.color = color
@@ -22,9 +25,9 @@ class Piece:
         self.image_selected = self.font.render(self.type.name[0], True, Colors.RED)
         self.image = self.image_default
 
-        boardx, boardy = board_pos
-        self.x, self.y = MathHelp.snap_topleft(Constants.TILE_SIZE, (boardx + self.col * Constants.TILE_LENGTH,
-                                                                     boardy + (9 - self.row) * Constants.TILE_LENGTH),
+        board_x, board_y = board_pos
+        self.x, self.y = MathHelp.snap_topleft(Constants.TILE_SIZE, (board_x + self.col * Constants.TILE_LENGTH,
+                                                                     board_y + (9 - self.row) * Constants.TILE_LENGTH),
                                                self.image.get_size())
 
         self.rect = self.image.get_rect()
@@ -35,7 +38,7 @@ class Piece:
     def toString(self) -> str:
         return str(self.type.name) + ", " + str(self.row) + chr(self.col + 96)
 
-    def test(self, turn: PlayerEnum.PlayerEnum):
+    def test(self, turn: PlayerEnum):
         mouse_state = pygame.mouse.get_pressed(3)
         if turn == self.player and self.rect.collidepoint(pygame.mouse.get_pos()):
             if self.pressed:
@@ -74,7 +77,7 @@ class PieceGroup:
         for p in self.group:
             p.blit(screen)
 
-    def test(self, turn: PlayerEnum.PlayerEnum) -> str:
+    def test(self, turn: PlayerEnum) -> str:
         command = "NO_ACTION"
         for p in self.group:
             command = p.test(turn)
