@@ -58,6 +58,7 @@ class ChessBoard:
     def blit_moves(self, screen: pygame.Surface, piece: Piece.Piece):
         # In this method determine piece type -> calculate available grid spots -> store them in self.moves -> blit
         if piece.type == GamePiece.GamePiece.PAWN:
+            pass
 
 
     def create_grid_standard(self):

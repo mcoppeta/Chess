@@ -7,7 +7,7 @@ from source.enums.PlayerEnum import *
 from source.enums.Orientation import *
 from source.enums.SelectionState import *
 
-from source.structs.ChessBoard import ChessBoard
+import source.structs.ChessBoard as ChessBoard
 
 
 class Piece:
@@ -80,7 +80,9 @@ class PieceGroup:
         for p in self.group:
             p.blit(screen)
 
-    def test(self, turn: PlayerEnum, event: pygame.event.Event, select_state: SelectionState, board: ChessBoard) -> str:
+    def test(self, turn: PlayerEnum, event: pygame.event.Event, select_state: SelectionState,
+             board) -> str:
+
         command = None
         print("PRE: " + select_state.name)
         if select_state == SelectionState.NO_SELECTION and event.type == pygame.MOUSEBUTTONDOWN:
@@ -99,7 +101,7 @@ class PieceGroup:
                 print("ERROR: piece selected, not confirmed, then test without button up")
         elif select_state == SelectionState.PIECE_CONFIRMED:
             # Display available moves
-
+            pass
         #elif select_state == SelectionState.MOVE_SELECTED:
             # handle btn up
         print("POST: " + command.name)

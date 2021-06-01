@@ -32,9 +32,9 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
                 if event.key == pygame.K_RETURN:
                     played = True
             if event.type == pygame.MOUSEBUTTONDOWN:
-                command = board.pieces.test(turn, event, selection_state)
+                command = board.pieces.test(turn, event, selection_state, board)
             if event.type == pygame.MOUSEBUTTONUP:
-                command = board.pieces.test(turn, event, selection_state)
+                command = board.pieces.test(turn, event, selection_state, board)
 
             if command != last_command:
                 print("loop: " + str(command.name))
