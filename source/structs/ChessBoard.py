@@ -59,20 +59,42 @@ class ChessBoard:
         pieces = Piece.PieceGroup()
         for r in range(1, 1 + Constants.BOARD_ROWS):
             for c in range(1, 1 + Constants.BOARD_COLS):
-                if r == 2:
-                    p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.ONE,
-                                    Colors.WHITE, r, c, self.rect.topleft)
-                    grid[Constants.BOARD_ROWS - r][c - 1] = p
-                    pieces.add(p)
-                elif r == 7:
-                    p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.TWO,
-                                    Colors.BLACK, r, c, self.rect.topleft)
-                    grid[Constants.BOARD_ROWS - r][c - 1] = p
-                    pieces.add(p)
+                p = None
+
+                if r == 1:  # Player 1 pieces
+                    if c == 1 or c == 8:
+                        p = Piece.Piece(GamePiece.GamePiece.ROOK, PlayerEnum.PlayerEnum.ONE, r, c, self.rect.topleft)
+                    elif c == 2 or c == 7:
+                        p = Piece.Piece(GamePiece.GamePiece.KNIGHT, PlayerEnum.PlayerEnum.ONE, r, c, self.rect.topleft)
+                    elif c == 3 or c == 6:
+                        p = Piece.Piece(GamePiece.GamePiece.BISHOP, PlayerEnum.PlayerEnum.ONE, r, c, self.rect.topleft)
+                    elif c == 4:
+                        p = Piece.Piece(GamePiece.GamePiece.QUEEN, PlayerEnum.PlayerEnum.ONE, r, c, self.rect. topleft)
+                    elif c == 5:
+                        p = Piece.Piece(GamePiece.GamePiece.KING, PlayerEnum.PlayerEnum.ONE, r, c, self.rect.topleft)
+                    else:
+                        print("ERROR: r=" + str(r) + ", c=" + str(c))
+                elif r == 2:  # Player 1 pawns
+                    p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.ONE, r, c, self.rect.topleft)
+                elif r == 7:  # Player 2 pawns
+                    p = Piece.Piece(GamePiece.GamePiece.PAWN, PlayerEnum.PlayerEnum.TWO, r, c, self.rect.topleft)
+                elif r == 8:  # Player 2 pieces
+                    if c == 1 or c == 8:
+                        p = Piece.Piece(GamePiece.GamePiece.ROOK, PlayerEnum.PlayerEnum.TWO, r, c, self.rect.topleft)
+                    elif c == 2 or c == 7:
+                        p = Piece.Piece(GamePiece.GamePiece.KNIGHT, PlayerEnum.PlayerEnum.TWO, r, c, self.rect.topleft)
+                    elif c == 3 or c == 6:
+                        p = Piece.Piece(GamePiece.GamePiece.BISHOP, PlayerEnum.PlayerEnum.TWO, r, c, self.rect.topleft)
+                    elif c == 4:
+                        p = Piece.Piece(GamePiece.GamePiece.QUEEN, PlayerEnum.PlayerEnum.TWO, r, c, self.rect. topleft)
+                    elif c == 5:
+                        p = Piece.Piece(GamePiece.GamePiece.KING, PlayerEnum.PlayerEnum.TWO, r, c, self.rect.topleft)
+                    else:
+                        print("ERROR: r=" + str(r) + ", c=" + str(c))
                 else:
-                    p = Piece.Piece(GamePiece.GamePiece.NULL, PlayerEnum.PlayerEnum.NULL,
-                                    Colors.ORANGE, r, c, self.rect.topleft)
-                    grid[Constants.BOARD_ROWS - r][c - 1] = p
-                    pieces.add(p)
+                    p = Piece.Piece(GamePiece.GamePiece.NULL, PlayerEnum.PlayerEnum.NULL, r, c, self.rect.topleft)
+
+                grid[Constants.BOARD_ROWS - r][c - 1] = p
+                pieces.add(p)
 
         return grid, pieces

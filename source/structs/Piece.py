@@ -8,8 +8,7 @@ from source.enums.Orientation import *
 
 
 class Piece:
-    def __init__(self, piece_type: GamePiece, player: PlayerEnum,
-                 color: pygame.Color, row: int, col: int, board_pos: tuple):
+    def __init__(self, piece_type: GamePiece, player: PlayerEnum, row: int, col: int, board_pos: tuple):
 
         self.row = row
         self.col = col
@@ -17,7 +16,9 @@ class Piece:
         self.direction = Orientation.UP if player == PlayerEnum.ONE else Orientation.DOWN
 
         self.player = player
-        self.color = color
+        self.color = Colors.WHITE if self.player == PlayerEnum.ONE else Colors.BLACK
+        if self.player == PlayerEnum.NULL:
+            self.color = Colors.GRAY
 
         self.font = pygame.font.SysFont("/fonts/LemonMilk.otf", 30)
 
@@ -36,7 +37,7 @@ class Piece:
         self.pressed = False
 
     def toString(self) -> str:
-        return str(self.type.name) + ", " + str(self.row) + chr(self.col + 96)
+        return str(self.type.name) + ", " + str(self.row) + chr(self.col + 96) + ", Player " + str(self.player.value)
 
     def test(self, turn: PlayerEnum):
         mouse_state = pygame.mouse.get_pressed(3)

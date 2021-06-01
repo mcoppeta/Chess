@@ -8,6 +8,7 @@ ORIGIN = (0, 0)
 # Colors
 DARK_COLOR = (50, 85, 255)
 LIGHT_COLOR = (200, 200, 200)
+SELECTABLE_COLOR = ()
 
 # Sizes
 TILE_LENGTH = 50
