@@ -5,6 +5,7 @@ from source.assist import MathHelp, Colors, Constants
 from source.structs import ChessBoard
 
 from source.enums.PlayerEnum import PlayerEnum
+from source.enums.SelectionState import SelectionState
 
 
 def start(screen: pygame.Surface, clock: pygame.time.Clock):
@@ -16,6 +17,9 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
 
     turn = PlayerEnum.ONE
     played = False
+    selection_state = SelectionState.NO_SELECTION
+    command = SelectionState.NO_SELECTION
+    last_command = SelectionState.NO_SELECTION
 
     run = True
     while run:
@@ -27,19 +31,21 @@ def start(screen: pygame.Surface, clock: pygame.time.Clock):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     played = True
-            if event.type == pygame.MOUSEMOTION:
-                command = board.pieces.test(turn)
             if event.type == pygame.MOUSEBUTTONDOWN:
-                command = board.pieces.test(turn)
+                command = board.pieces.test(turn, event, selection_state)
             if event.type == pygame.MOUSEBUTTONUP:
-                command = board.pieces.test(turn)
+                command = board.pieces.test(turn, event, selection_state)
 
-            if command != "NO_ACTION":
-                print(command)
+            if command != last_command:
+                print("loop: " + str(command.name))
+                last_command = command
+                selection_state = command
 
         screen.blit(background, Constants.ORIGIN)
 
         board.blit(screen)
+        if selection_state == SelectionState.MOVE_CONFIRMED:
+            board.blit_moves(screen, board.pieces.selected)
         board.blit_pieces(screen)
 
         pygame.display.flip()

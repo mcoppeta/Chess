@@ -5,6 +5,9 @@ from source.assist import Colors, Constants, MathHelp
 from source.enums.GamePiece import *
 from source.enums.PlayerEnum import *
 from source.enums.Orientation import *
+from source.enums.SelectionState import *
+
+from source.structs.ChessBoard import ChessBoard
 
 
 class Piece:
@@ -34,6 +37,8 @@ class Piece:
         self.rect = self.image.get_rect()
         self.rect.topleft = self.x, self.y
 
+        self.unmoved = True  # True if the piece hasn't been moved yet (needed for pawns, and castling)
+
         self.pressed = False
 
     def toString(self) -> str:
@@ -42,24 +47,21 @@ class Piece:
     def test(self, turn: PlayerEnum):
         mouse_state = pygame.mouse.get_pressed(3)
         if turn == self.player and self.rect.collidepoint(pygame.mouse.get_pos()):
-            if self.pressed:
-                if mouse_state[0] == 0:
-                    self.pressed = False
-                    self.image = self.image_default
-                    return self.toString()
-            else:
-                if mouse_state[0] == 1:
-                    self.pressed = True
-                    self.image = self.image_selected
-        else:
-            self.image = self.image_default
-            self.pressed = False
-        return "NO_ACTION"
+            self.pressed = True
+            self.image = self.image_selected
+            return SelectionState.PIECE_SELECTED, self
+        return SelectionState.NO_SELECTION, None
+
+    def select_confirm(self, turn: PlayerEnum):
+        self.pressed = True
+        self.image = self.image_selected
+        return SelectionState.PIECE_CONFIRMED, self
 
 
 class PieceGroup:
     def __init__(self, *args: Piece):
         self.group = []
+        self.selected = None
 
         self.add(*args)
 
@@ -78,11 +80,28 @@ class PieceGroup:
         for p in self.group:
             p.blit(screen)
 
-    def test(self, turn: PlayerEnum) -> str:
-        command = "NO_ACTION"
-        for p in self.group:
-            command = p.test(turn)
-            if command != "NO_ACTION":
-                return command
+    def test(self, turn: PlayerEnum, event: pygame.event.Event, select_state: SelectionState, board: ChessBoard) -> str:
+        command = None
+        print("PRE: " + select_state.name)
+        if select_state == SelectionState.NO_SELECTION and event.type == pygame.MOUSEBUTTONDOWN:
+            print("should select")
+            for p in self.group:
+                command, piece = p.test(turn)
+                if command != SelectionState.NO_SELECTION:
+                    print("selects?: " + command.name)
+                    self.selected = piece
+                    break
+        elif select_state == SelectionState.PIECE_SELECTED:
+            if event.type == pygame.MOUSEBUTTONUP:
+                print("should confirm")
+                command, self.selected = self.selected.select_confirm(turn)
+            else:
+                print("ERROR: piece selected, not confirmed, then test without button up")
+        elif select_state == SelectionState.PIECE_CONFIRMED:
+            # Display available moves
+
+        #elif select_state == SelectionState.MOVE_SELECTED:
+            # handle btn up
+        print("POST: " + command.name)
         return command
 

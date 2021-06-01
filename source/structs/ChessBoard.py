@@ -45,6 +45,7 @@ class ChessBoard:
             colors_index = MathHelp.toggle(colors_index)
 
         self.grid, self.pieces = self.create_grid_standard()
+        self.moves = []
 
     def blit(self, screen: pygame.Surface):
         screen.blit(self.image, self.rect.topleft)
@@ -53,6 +54,11 @@ class ChessBoard:
         for row in self.grid:
             for piece in row:
                 screen.blit(piece.image, piece.rect)  # TODO: Isn't this what PieceGroup is for?
+
+    def blit_moves(self, screen: pygame.Surface, piece: Piece.Piece):
+        # In this method determine piece type -> calculate available grid spots -> store them in self.moves -> blit
+        if piece.type == GamePiece.GamePiece.PAWN:
+
 
     def create_grid_standard(self):
         grid = [[0 for j in range(Constants.BOARD_COLS)] for i in range(Constants.BOARD_ROWS)]
